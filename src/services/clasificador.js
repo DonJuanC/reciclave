@@ -37,8 +37,24 @@ const ESQUEMA = {
     required: ['caneca', 'explicacion', 'preparacion', 'pregunta'],
 };
 
-// Errores pasajeros: saturación (503) o límite de cuota (429).
-const esTemporal = (err) => /\b(503|429)\b/.test(err.message);
+// Tiempo máximo de espera por llamada a Gemini.
+const LIMITE_MS = 15000;
+
+// Errores pasajeros: saturación (503), límite de cuota (429) o modelo que no responde.
+const esTemporal = (err) => err.sinRespuesta === true || /\b(503|429)\b/.test(err.message);
+
+// Corta la espera si Gemini no contesta a tiempo; el error se trata como pasajero.
+function conLimite(promesa, ms = LIMITE_MS) {
+    let reloj;
+    const limite = new Promise((_, reject) => {
+        reloj = setTimeout(() => {
+            const err = new Error(`Gemini no respondió en ${ms / 1000} s`);
+            err.sinRespuesta = true;
+            reject(err);
+        }, ms);
+    });
+    return Promise.race([promesa, limite]).finally(() => clearTimeout(reloj));
+}
 
 // Reintenta ante un error pasajero, con espera creciente.
 async function conReintentos(fn, intentos = 3) {
@@ -46,7 +62,8 @@ async function conReintentos(fn, intentos = 3) {
         try {
             return await fn();
         } catch (err) {
-            if (!esTemporal(err) || i === intentos) throw err;
+            // Si el modelo no respondió, no se insiste: se pasa al siguiente.
+            if (!esTemporal(err) || err.sinRespuesta || i === intentos) throw err;
             await new Promise((r) => setTimeout(r, 2000 * i));
         }
     }
@@ -66,7 +83,7 @@ async function preguntarAGemini(texto, candidatos) {
     let ultimoError;
     for (const modelo of MODELOS) {
         try {
-            const response = await conReintentos(() => ai.models.generateContent({
+            const response = await conReintentos(() => conLimite(ai.models.generateContent({
                 model: modelo,
                 contents: prompt,
                 config: {
@@ -75,7 +92,7 @@ async function preguntarAGemini(texto, candidatos) {
                     responseSchema: ESQUEMA,
                     temperature: 0,
                 },
-            }), 2);
+            })), 2);
             return { ...JSON.parse(response.text), modelo };
         } catch (err) {
             if (!esTemporal(err)) throw err;
