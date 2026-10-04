@@ -9,7 +9,11 @@ const { buscarCandidatos } = require('./busqueda');
 const UMBRAL_DIRECTO = 0.77;
 const UMBRAL_FUERA = 0.70;
 const DIF_MINIMA = 0.05;
-const MODELO = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+// Lista separada por comas, en orden de preferencia. Si un modelo está saturado, se usa el siguiente.
+const MODELOS = (process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite')
+    .split(',')
+    .map((m) => m.trim())
+    .filter(Boolean);
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
@@ -33,14 +37,16 @@ const ESQUEMA = {
     required: ['caneca', 'explicacion', 'preparacion', 'pregunta'],
 };
 
-// Reintenta ante saturación (503) o límite de cuota (429), con espera creciente.
+// Errores pasajeros: saturación (503) o límite de cuota (429).
+const esTemporal = (err) => /\b(503|429)\b/.test(err.message);
+
+// Reintenta ante un error pasajero, con espera creciente.
 async function conReintentos(fn, intentos = 3) {
     for (let i = 1; ; i++) {
         try {
             return await fn();
         } catch (err) {
-            const temporal = /\b(503|429)\b/.test(err.message);
-            if (!temporal || i === intentos) throw err;
+            if (!esTemporal(err) || i === intentos) throw err;
             await new Promise((r) => setTimeout(r, 2000 * i));
         }
     }
@@ -56,17 +62,27 @@ async function preguntarAGemini(texto, candidatos) {
             'Si son el mismo objeto en distinto estado, responde "depende" y pregunta por el estado. ' +
             'Si ninguno corresponde al residuo, ignóralos y clasifica con la norma.';
     }
-    const response = await conReintentos(() => ai.models.generateContent({
-        model: MODELO,
-        contents: prompt,
-        config: {
-            systemInstruction: NORMA,
-            responseMimeType: 'application/json',
-            responseSchema: ESQUEMA,
-            temperature: 0,
-        },
-    }));
-    return JSON.parse(response.text);
+    // Cadena de respaldo: prueba cada modelo en orden y pasa al siguiente si está saturado.
+    let ultimoError;
+    for (const modelo of MODELOS) {
+        try {
+            const response = await conReintentos(() => ai.models.generateContent({
+                model: modelo,
+                contents: prompt,
+                config: {
+                    systemInstruction: NORMA,
+                    responseMimeType: 'application/json',
+                    responseSchema: ESQUEMA,
+                    temperature: 0,
+                },
+            }), 2);
+            return { ...JSON.parse(response.text), modelo };
+        } catch (err) {
+            if (!esTemporal(err)) throw err;
+            ultimoError = err;
+        }
+    }
+    throw ultimoError;
 }
 
 async function clasificar(texto) {
