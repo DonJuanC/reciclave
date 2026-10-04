@@ -1,0 +1,884 @@
+[
+  {
+    "id": 1,
+    "nombre": "botella plástica de gaseosa o agua",
+    "sinonimos": [
+      "botella PET",
+      "envase de gaseosa",
+      "botella de agua"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "vacía",
+    "preparacion": [
+      "Vaciar",
+      "Enjuagar",
+      "Aplastar y tapar"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 2,
+    "nombre": "envase de champú o detergente",
+    "sinonimos": [
+      "tarro de champú",
+      "envase de jabón líquido",
+      "frasco de suavizante"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "vacío",
+    "preparacion": [
+      "Vaciar por completo",
+      "Enjuagar",
+      "Dejar secar"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 3,
+    "nombre": "tapas plásticas",
+    "sinonimos": [
+      "tapitas",
+      "tapa de botella"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "limpias",
+    "preparacion": [
+      "Juntarlas en una botella o bolsa"
+    ],
+    "nota": "Muchas fundaciones las reciben en campañas de recolección.",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 4,
+    "nombre": "bolsa plástica limpia",
+    "sinonimos": [
+      "bolsa de supermercado",
+      "bolsa de mercado"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "limpia y seca",
+    "preparacion": [
+      "Sacudir",
+      "Compactar varias dentro de una"
+    ],
+    "nota": "Si está sucia de comida o grasa va en la negra.",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 5,
+    "nombre": "bolsa de leche",
+    "sinonimos": [
+      "empaque de leche en bolsa"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "enjuagada",
+    "preparacion": [
+      "Abrir",
+      "Enjuagar",
+      "Secar"
+    ],
+    "nota": "Sin enjuagar contamina el resto del material aprovechable.",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 6,
+    "nombre": "vaso o plato desechable plástico limpio",
+    "sinonimos": [
+      "vaso desechable",
+      "plato desechable"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "limpio",
+    "preparacion": [
+      "Enjuagar",
+      "Secar",
+      "Apilar"
+    ],
+    "nota": "Con restos de comida va en la negra.",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "media"
+  },
+  {
+    "id": 7,
+    "nombre": "botella de vidrio",
+    "sinonimos": [
+      "botella de cerveza",
+      "botella de vino",
+      "envase de vidrio"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "vacía",
+    "preparacion": [
+      "Vaciar",
+      "Enjuagar",
+      "Entregar entera, sin romper"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 8,
+    "nombre": "frasco de vidrio de conservas",
+    "sinonimos": [
+      "frasco de mermelada",
+      "tarro de vidrio",
+      "frasco de salsa"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "vacío",
+    "preparacion": [
+      "Enjuagar",
+      "Separar la tapa metálica (también va en la blanca)"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 9,
+    "nombre": "vidrio roto de botella o frasco",
+    "sinonimos": [
+      "vidrio quebrado",
+      "botella rota"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "envuelto",
+    "preparacion": [
+      "Envolver en papel o cartón",
+      "Marcar como 'vidrio roto'"
+    ],
+    "nota": "Protege al reciclador de oficio. Espejos y vidrio de ventana van en la negra.",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "media"
+  },
+  {
+    "id": 10,
+    "nombre": "lata de aluminio",
+    "sinonimos": [
+      "lata de cerveza",
+      "lata de gaseosa"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "vacía",
+    "preparacion": [
+      "Vaciar",
+      "Enjuagar",
+      "Aplastar"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 11,
+    "nombre": "lata de conservas",
+    "sinonimos": [
+      "lata de atún",
+      "lata de sardinas",
+      "lata de fríjoles",
+      "enlatado"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "vacía",
+    "preparacion": [
+      "Enjuagar para quitar aceite o salsa",
+      "Meter la tapa dentro de la lata"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 12,
+    "nombre": "papel aluminio limpio",
+    "sinonimos": [
+      "papel de aluminio",
+      "foil"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "limpio",
+    "preparacion": [
+      "Hacer una bola compacta"
+    ],
+    "nota": "Con grasa o comida pegada va en la negra.",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "media"
+  },
+  {
+    "id": 13,
+    "nombre": "envase Tetra Pak",
+    "sinonimos": [
+      "caja de leche",
+      "caja de jugo",
+      "multicapa",
+      "cartón de leche"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "vacío",
+    "preparacion": [
+      "Vaciar",
+      "Enjuagar",
+      "Aplastar"
+    ],
+    "nota": "La resolución incluye el multicapa expresamente en la blanca.",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 14,
+    "nombre": "papel de oficina",
+    "sinonimos": [
+      "hojas usadas",
+      "papel bond",
+      "fotocopias",
+      "hojas de cuaderno"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "limpio y seco",
+    "preparacion": [
+      "No arrugar",
+      "Quitar ganchos si es fácil"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 15,
+    "nombre": "periódico y revistas",
+    "sinonimos": [
+      "diario",
+      "prensa",
+      "revista vieja"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "seco",
+    "preparacion": [
+      "Apilar y amarrar"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 16,
+    "nombre": "caja de cartón",
+    "sinonimos": [
+      "cartón corrugado",
+      "caja de envío",
+      "caja de zapatos"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "limpia y seca",
+    "preparacion": [
+      "Desarmar y aplanar",
+      "Quitar cinta si es fácil"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 17,
+    "nombre": "caja de pizza limpia",
+    "sinonimos": [
+      "caja de pizza sin grasa"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "sin grasa ni restos",
+    "preparacion": [
+      "Aplanar"
+    ],
+    "nota": "Si solo la base está engrasada, separa la tapa limpia (blanca) de la base (negra).",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 18,
+    "nombre": "cubeta de huevos de cartón",
+    "sinonimos": [
+      "panal de huevos",
+      "bandeja de huevos"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "limpia y seca",
+    "preparacion": [
+      "Apilar"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 19,
+    "nombre": "tubo de cartón de papel higiénico",
+    "sinonimos": [
+      "rollo de cartón",
+      "tubo de papel de cocina"
+    ],
+    "caneca": "blanca",
+    "aprovechable": true,
+    "condicion": "seco",
+    "preparacion": [
+      "Aplastar"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 20,
+    "nombre": "servilleta de papel usada",
+    "sinonimos": [
+      "servilleta sucia",
+      "servilleta"
+    ],
+    "caneca": "negra",
+    "aprovechable": false,
+    "condicion": "usada",
+    "preparacion": [],
+    "nota": "El papel contaminado con comida o grasa no es aprovechable.",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 21,
+    "nombre": "papel higiénico usado",
+    "sinonimos": [
+      "papel de baño"
+    ],
+    "caneca": "negra",
+    "aprovechable": false,
+    "condicion": "usado",
+    "preparacion": [],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 22,
+    "nombre": "toalla de cocina de papel usada",
+    "sinonimos": [
+      "papel de cocina",
+      "toalla absorbente"
+    ],
+    "caneca": "negra",
+    "aprovechable": false,
+    "condicion": "usada",
+    "preparacion": [],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 23,
+    "nombre": "caja de pizza engrasada",
+    "sinonimos": [
+      "caja de pizza sucia",
+      "cartón con grasa"
+    ],
+    "caneca": "negra",
+    "aprovechable": false,
+    "condicion": "con grasa o restos",
+    "preparacion": [],
+    "nota": "El cartón contaminado con comida no es aprovechable.",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 24,
+    "nombre": "pañal desechable",
+    "sinonimos": [
+      "pañales",
+      "pañal usado"
+    ],
+    "caneca": "negra",
+    "aprovechable": false,
+    "condicion": "usado",
+    "preparacion": [
+      "Enrollar y cerrar"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 25,
+    "nombre": "toalla higiénica o tampón",
+    "sinonimos": [
+      "toallas sanitarias",
+      "protector"
+    ],
+    "caneca": "negra",
+    "aprovechable": false,
+    "condicion": "usado",
+    "preparacion": [
+      "Envolver"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 26,
+    "nombre": "tapabocas desechable",
+    "sinonimos": [
+      "mascarilla",
+      "cubrebocas"
+    ],
+    "caneca": "negra",
+    "aprovechable": false,
+    "condicion": "usado",
+    "preparacion": [
+      "Cortar las tiras"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 27,
+    "nombre": "icopor",
+    "sinonimos": [
+      "poliestireno expandido",
+      "bandeja de icopor",
+      "caja de icopor",
+      "unicel"
+    ],
+    "caneca": "negra",
+    "aprovechable": false,
+    "condicion": "cualquiera",
+    "preparacion": [],
+    "nota": "Las guías oficiales lo clasifican como no aprovechable; algunas ciudades tienen rutas específicas.",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "media"
+  },
+  {
+    "id": 28,
+    "nombre": "empaque metalizado de snacks",
+    "sinonimos": [
+      "paquete de papas",
+      "bolsa de mecato",
+      "envoltura de chocolatina"
+    ],
+    "caneca": "negra",
+    "aprovechable": false,
+    "condicion": "cualquiera",
+    "preparacion": [],
+    "nota": "Los empaques metalizados no entran en la ruta de aprovechamiento.",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 29,
+    "nombre": "vaso de cartón para café",
+    "sinonimos": [
+      "vaso de café para llevar",
+      "vaso desechable de cartón"
+    ],
+    "caneca": "negra",
+    "aprovechable": false,
+    "condicion": "usado",
+    "preparacion": [],
+    "nota": "El cartón plastificado no es aprovechable. La tapa plástica limpia sí va en la blanca.",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "media"
+  },
+  {
+    "id": 30,
+    "nombre": "recibo o factura en papel térmico",
+    "sinonimos": [
+      "tirilla",
+      "voucher",
+      "recibo de datáfono"
+    ],
+    "caneca": "negra",
+    "aprovechable": false,
+    "condicion": "cualquiera",
+    "preparacion": [],
+    "nota": "El papel térmico no se recicla con el papel común.",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "media"
+  },
+  {
+    "id": 31,
+    "nombre": "colillas de cigarrillo",
+    "sinonimos": [
+      "chicote",
+      "colilla"
+    ],
+    "caneca": "negra",
+    "aprovechable": false,
+    "condicion": "apagadas",
+    "preparacion": [
+      "Verificar que estén apagadas"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 32,
+    "nombre": "cerámica o loza rota",
+    "sinonimos": [
+      "plato roto",
+      "pocillo roto",
+      "porcelana"
+    ],
+    "caneca": "negra",
+    "aprovechable": false,
+    "condicion": "envuelta",
+    "preparacion": [
+      "Envolver en papel para evitar cortes"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 33,
+    "nombre": "espejo o vidrio de ventana roto",
+    "sinonimos": [
+      "vidrio plano",
+      "espejo roto"
+    ],
+    "caneca": "negra",
+    "aprovechable": false,
+    "condicion": "envuelto",
+    "preparacion": [
+      "Envolver y marcar"
+    ],
+    "nota": "No se recicla junto con el vidrio de envases.",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "media"
+  },
+  {
+    "id": 34,
+    "nombre": "esponja de cocina",
+    "sinonimos": [
+      "esponjilla",
+      "estropajo sintético"
+    ],
+    "caneca": "negra",
+    "aprovechable": false,
+    "condicion": "usada",
+    "preparacion": [],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 35,
+    "nombre": "cepillo de dientes",
+    "sinonimos": [
+      "cepillo dental"
+    ],
+    "caneca": "negra",
+    "aprovechable": false,
+    "condicion": "usado",
+    "preparacion": [],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 36,
+    "nombre": "arena o excremento de mascota",
+    "sinonimos": [
+      "arena de gato",
+      "popó de perro"
+    ],
+    "caneca": "negra",
+    "aprovechable": false,
+    "condicion": "en bolsa cerrada",
+    "preparacion": [
+      "Cerrar bien la bolsa"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 37,
+    "nombre": "barrido y polvo",
+    "sinonimos": [
+      "polvo de la aspiradora",
+      "mugre del piso"
+    ],
+    "caneca": "negra",
+    "aprovechable": false,
+    "condicion": "cualquiera",
+    "preparacion": [],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 38,
+    "nombre": "cáscaras de frutas y verduras",
+    "sinonimos": [
+      "cáscara de banano",
+      "cáscara de papa",
+      "pelas"
+    ],
+    "caneca": "verde",
+    "aprovechable": true,
+    "condicion": "crudas",
+    "preparacion": [
+      "Escurrir"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 39,
+    "nombre": "restos de comida",
+    "sinonimos": [
+      "sobras",
+      "comida cocida",
+      "sobrados"
+    ],
+    "caneca": "verde",
+    "aprovechable": true,
+    "condicion": "sin empaques",
+    "preparacion": [
+      "Escurrir líquidos"
+    ],
+    "nota": "Si tu municipio aún no tiene ruta de orgánicos, la empresa de aseo los recoge con los no aprovechables.",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "media"
+  },
+  {
+    "id": 40,
+    "nombre": "cáscaras de huevo",
+    "sinonimos": [
+      "cascarón"
+    ],
+    "caneca": "verde",
+    "aprovechable": true,
+    "condicion": "cualquiera",
+    "preparacion": [],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 41,
+    "nombre": "cuncho y filtro de café",
+    "sinonimos": [
+      "borra de café",
+      "ripio de café",
+      "café molido usado"
+    ],
+    "caneca": "verde",
+    "aprovechable": true,
+    "condicion": "usado",
+    "preparacion": [],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 42,
+    "nombre": "residuos de poda y flores",
+    "sinonimos": [
+      "hojas secas",
+      "pasto cortado",
+      "ramas",
+      "flores marchitas"
+    ],
+    "caneca": "verde",
+    "aprovechable": true,
+    "condicion": "cualquiera",
+    "preparacion": [
+      "Cortar ramas largas"
+    ],
+    "nota": "",
+    "fuente": "Res. 2184/2019 art. 4",
+    "confianza": "alta"
+  },
+  {
+    "id": 43,
+    "nombre": "pilas",
+    "sinonimos": [
+      "pila AA",
+      "pila AAA",
+      "batería de control",
+      "pila de botón"
+    ],
+    "caneca": "posconsumo",
+    "aprovechable": null,
+    "condicion": "usadas",
+    "preparacion": [
+      "Guardar en un frasco seco",
+      "Llevar a un contenedor de recolección de pilas"
+    ],
+    "nota": "Nunca a la caneca: son residuo peligroso.",
+    "fuente": "Res. 1297/2010 (posconsumo pilas)",
+    "confianza": "alta"
+  },
+  {
+    "id": 44,
+    "nombre": "medicamentos vencidos",
+    "sinonimos": [
+      "pastillas vencidas",
+      "jarabe vencido",
+      "remedios"
+    ],
+    "caneca": "posconsumo",
+    "aprovechable": null,
+    "condicion": "vencidos o sobrantes",
+    "preparacion": [
+      "Dejarlos en su empaque",
+      "Llevar a un contenedor de droguería o supermercado"
+    ],
+    "nota": "No botar al sanitario ni a la caneca.",
+    "fuente": "Res. 371/2009 (posconsumo medicamentos)",
+    "confianza": "alta"
+  },
+  {
+    "id": 45,
+    "nombre": "aceite de cocina usado",
+    "sinonimos": [
+      "aceite quemado",
+      "aceite de fritura",
+      "ACU"
+    ],
+    "caneca": "posconsumo",
+    "aprovechable": null,
+    "condicion": "frío",
+    "preparacion": [
+      "Dejar enfriar",
+      "Envasar en botella plástica con tapa",
+      "Llevar a punto de recolección"
+    ],
+    "nota": "Nunca por el sifón.",
+    "fuente": "Res. 316/2018 (aceite de cocina usado)",
+    "confianza": "alta"
+  },
+  {
+    "id": 46,
+    "nombre": "bombillo ahorrador o tubo fluorescente",
+    "sinonimos": [
+      "bombillo",
+      "foco",
+      "lámpara fluorescente"
+    ],
+    "caneca": "posconsumo",
+    "aprovechable": null,
+    "condicion": "entero",
+    "preparacion": [
+      "No romper",
+      "Guardar en su caja",
+      "Llevar a punto de recolección"
+    ],
+    "nota": "Contienen mercurio.",
+    "fuente": "Res. 1511/2010 (posconsumo bombillas)",
+    "confianza": "alta"
+  },
+  {
+    "id": 47,
+    "nombre": "celular, cargador y cables",
+    "sinonimos": [
+      "teléfono viejo",
+      "audífonos dañados",
+      "cable USB"
+    ],
+    "caneca": "posconsumo",
+    "aprovechable": null,
+    "condicion": "en desuso",
+    "preparacion": [
+      "Borrar datos personales",
+      "Llevar a punto de recolección de RAEE"
+    ],
+    "nota": "",
+    "fuente": "Ley 1672/2013 (RAEE)",
+    "confianza": "alta"
+  },
+  {
+    "id": 48,
+    "nombre": "computador y periféricos",
+    "sinonimos": [
+      "portátil",
+      "teclado",
+      "mouse",
+      "impresora",
+      "monitor"
+    ],
+    "caneca": "posconsumo",
+    "aprovechable": null,
+    "condicion": "en desuso",
+    "preparacion": [
+      "Borrar datos",
+      "Llevar a punto de recolección de RAEE"
+    ],
+    "nota": "",
+    "fuente": "Res. 1512/2010 y Ley 1672/2013",
+    "confianza": "alta"
+  },
+  {
+    "id": 49,
+    "nombre": "electrodoméstico pequeño",
+    "sinonimos": [
+      "licuadora dañada",
+      "plancha",
+      "secador",
+      "tostadora"
+    ],
+    "caneca": "posconsumo",
+    "aprovechable": null,
+    "condicion": "en desuso",
+    "preparacion": [
+      "Llevar a punto de recolección de RAEE"
+    ],
+    "nota": "",
+    "fuente": "Ley 1672/2013 (RAEE)",
+    "confianza": "alta"
+  },
+  {
+    "id": 50,
+    "nombre": "envase de insecticida doméstico",
+    "sinonimos": [
+      "veneno",
+      "plaguicida",
+      "mata cucarachas"
+    ],
+    "caneca": "posconsumo",
+    "aprovechable": null,
+    "condicion": "vacío",
+    "preparacion": [
+      "No enjuagar en el lavaplatos",
+      "Llevar a punto de recolección"
+    ],
+    "nota": "",
+    "fuente": "Res. 1675/2013 (posconsumo plaguicidas)",
+    "confianza": "media"
+  }
+]
