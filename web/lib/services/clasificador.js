@@ -38,7 +38,7 @@ const ESQUEMA = {
 };
 
 // Tiempo máximo de espera por llamada a Gemini.
-const LIMITE_MS = 15000;
+const LIMITE_MS = 8000;
 
 // Errores pasajeros: saturación (503), límite de cuota (429) o modelo que no responde.
 const esTemporal = (err) => err.sinRespuesta === true || /\b(503|429)\b/.test(err.message);
