@@ -15,5 +15,12 @@ CREATE TABLE IF NOT EXISTS residuos (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+CREATE TABLE IF NOT EXISTS limites (
+    clave TEXT NOT NULL,
+    ventana TIMESTAMPTZ NOT NULL,
+    conteo INT NOT NULL DEFAULT 1,
+    PRIMARY KEY (clave, ventana)
+);
+
 CREATE INDEX IF NOT EXISTS residuos_embedding_idx
     ON residuos USING hnsw (embedding vector_cosine_ops);
