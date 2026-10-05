@@ -1,28 +1,20 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* Identidad "cartel caleño": colores planos y dos tipografías. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-barlow);
+  --font-display: var(--font-anton);
+  --color-tinta: #16110c;
+  --color-crema: #f5ead2;
+  --color-rojo: #e2352b;
+  --color-amarillo: #f7c41f;
+  --color-verde: #0d8f4f;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #f5ead2;
+  color: #16110c;
+  font-family: var(--font-barlow), system-ui, sans-serif;
 }
 
 /* Tailwind 4 deja los botones con cursor de flecha; se restaura la manito. */
@@ -30,5 +22,39 @@ body {
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
+  }
+}
+
+/* Trama de puntos de fondo. */
+.trama {
+  background-image: radial-gradient(rgb(22 17 12 / 0.07) 1px, transparent 1.4px);
+  background-size: 9px 9px;
+}
+
+/* Sombra dura, sin difuminar. El color se cambia con --sombra. */
+.sombra {
+  box-shadow: 4px 4px 0 var(--sombra, #16110c);
+}
+.sombra-lg {
+  box-shadow: 7px 7px 0 var(--sombra, #16110c);
+}
+
+/* Entrada del resultado. */
+@keyframes entra {
+  from {
+    transform: translateY(14px) scale(0.97);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+.entra {
+  animation: entra 0.32s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .entra {
+    animation: none;
   }
 }

@@ -30,18 +30,27 @@ const EJEMPLOS = [
   'colchón viejo',
 ];
 
+// Cada ejemplo va como una etiqueta de color, algunas torcidas.
+const ETIQUETAS = [
+  'bg-amarillo text-tinta',
+  'bg-white text-tinta -rotate-2',
+  'bg-verde text-white rotate-1',
+];
+
 // Color de toda la pantalla según la respuesta.
 const FONDO = {
-  inicio: 'bg-stone-100 text-stone-900',
-  blanca: 'bg-stone-100 text-stone-900',
-  negra: 'bg-neutral-900 text-white',
-  verde: 'bg-green-700 text-white',
-  posconsumo: 'bg-amber-400 text-amber-950',
-  depende: 'bg-neutral-900 text-white',
-  error: 'bg-red-900 text-white',
+  inicio: 'bg-crema text-tinta',
+  depende: 'bg-crema text-tinta',
+  blanca: 'bg-[#fffaf0] text-tinta',
+  negra: 'bg-tinta text-crema',
+  verde: 'bg-verde text-crema',
+  posconsumo: 'bg-amarillo text-tinta',
+  error: 'bg-rojo text-crema',
 };
 
-const NOMBRE = { blanca: 'BLANCA', negra: 'NEGRA', verde: 'VERDE' };
+const NOMBRE = { blanca: 'Blanca', negra: 'Negra', verde: 'Verde' };
+
+const TITULAR = 'font-display uppercase';
 
 export default function Clasificador() {
   const [estado, setEstado] = useState<Estado>({ fase: 'inicio' });
@@ -75,6 +84,11 @@ export default function Clasificador() {
   const clave =
     estado.fase === 'resultado' ? estado.datos.caneca : estado.fase === 'error' ? 'error' : 'inicio';
 
+  // Sobre fondos oscuros o saturados, el acento pasa de rojo a amarillo.
+  const fondoFuerte = clave === 'negra' || clave === 'verde' || clave === 'error';
+  const acento = fondoFuerte ? 'text-amarillo' : 'text-rojo';
+  const borde = clave === 'negra' ? 'border-crema [--sombra:var(--color-amarillo)]' : 'border-tinta';
+
   const campo = (placeholder: string) => (
     <form onSubmit={enviar} className="flex gap-2">
       <input
@@ -83,41 +97,53 @@ export default function Clasificador() {
         placeholder={placeholder}
         maxLength={120}
         aria-label="Residuo"
-        className="min-w-0 flex-1 rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900"
+        className={`sombra min-w-0 flex-1 border-[3px] bg-white px-3 py-3 text-tinta ${borde}`}
       />
-      <button type="submit" className="rounded-xl border-2 border-current px-4 font-bold">
-        Consultar
+      <button
+        type="submit"
+        className={`sombra border-[3px] bg-rojo px-3.5 text-[17px] tracking-wider text-white ${TITULAR} ${borde}`}
+      >
+        ¿Dónde va?
       </button>
     </form>
   );
 
   return (
-    <div className={`min-h-dvh transition-colors duration-300 ${FONDO[clave]}`}>
+    <div className={`trama min-h-dvh transition-colors duration-300 ${FONDO[clave]}`}>
       <div className="mx-auto flex min-h-dvh max-w-md flex-col p-4">
         <header className="flex items-center justify-between">
-          <span className="text-lg font-extrabold">Reciclá, ve</span>
+          <span className={`text-2xl tracking-wide ${TITULAR}`}>
+            Reciclá, <span className={acento}>ve</span>
+          </span>
           {estado.fase !== 'inicio' && (
-            <button onClick={() => setEstado({ fase: 'inicio' })} className="text-sm underline opacity-80">
+            <button
+              onClick={() => setEstado({ fase: 'inicio' })}
+              className={`border-2 border-current px-2.5 py-1 text-sm tracking-wider ${TITULAR}`}
+            >
               Inicio
             </button>
           )}
         </header>
 
-        <main className="flex flex-1 flex-col justify-center py-6" aria-live="polite">
+        <main className="flex flex-1 flex-col justify-center py-5" aria-live="polite">
           {estado.fase === 'inicio' && (
             <div>
-              <h1 className="text-4xl font-extrabold leading-tight">¿Qué vas a botar, ve?</h1>
-              <p className="mb-5 mt-2 text-stone-600">
+              <h1 className={`mb-3.5 text-[clamp(60px,21vw,98px)] leading-[0.88] ${TITULAR}`}>
+                ¿Qué vas
+                <br />
+                a botar, <span className="inline-block -rotate-3 text-rojo">ve?</span>
+              </h1>
+              <p className="mb-5 max-w-xs">
                 Te digo en qué caneca va, según el código de colores de Colombia.
               </p>
               {campo('Ej: servilleta de papel usada')}
-              <p className="mt-6 text-sm text-stone-600">O prueba con un ejemplo:</p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {EJEMPLOS.map((ejemplo) => (
+              <p className={`mb-2.5 mt-7 text-sm tracking-widest ${TITULAR}`}>O toca uno de estos</p>
+              <div className="flex flex-wrap gap-2">
+                {EJEMPLOS.map((ejemplo, i) => (
                   <button
                     key={ejemplo}
                     onClick={() => consultar(ejemplo)}
-                    className="rounded-full border border-stone-300 px-3 py-1.5 text-sm"
+                    className={`border-2 border-tinta px-3 py-1.5 text-sm font-semibold ${ETIQUETAS[i % 3]}`}
                   >
                     {ejemplo}
                   </button>
@@ -128,18 +154,21 @@ export default function Clasificador() {
 
           {estado.fase === 'cargando' && (
             <div className="text-center">
-              <div className="mx-auto mb-4 h-11 w-11 animate-spin rounded-full border-4 border-stone-300 border-t-stone-900" />
-              <p>Buscando “{estado.texto}”…</p>
+              <div className="mx-auto mb-4 h-16 w-16 animate-spin rounded-full border-[6px] border-tinta border-t-rojo" />
+              <p className={`text-xl tracking-widest ${TITULAR}`}>Mirando, ve…</p>
+              <p className="mt-1">“{estado.texto}”</p>
             </div>
           )}
 
           {estado.fase === 'error' && (
             <div className="text-center">
-              <h2 className="text-3xl font-extrabold">Uy, no pude responder</h2>
-              <p className="mx-auto mt-3 max-w-xs">{estado.mensaje}</p>
+              <h2 className={`entra text-[clamp(52px,17vw,80px)] leading-[0.9] ${TITULAR}`}>
+                ¡Uy! No pude
+              </h2>
+              <p className="mx-auto mt-3 max-w-xs font-semibold">{estado.mensaje}</p>
               <button
                 onClick={() => consultar(estado.texto)}
-                className="mt-5 rounded-xl bg-white px-5 py-3 font-bold text-red-900"
+                className={`sombra mt-5 border-[3px] border-tinta bg-amarillo px-5 py-2.5 text-lg tracking-wider text-tinta ${TITULAR}`}
               >
                 Reintentar
               </button>
@@ -148,26 +177,36 @@ export default function Clasificador() {
 
           {estado.fase === 'resultado' && estado.datos.caneca === 'depende' && (
             <div>
-              <p className="text-center text-xs uppercase tracking-widest opacity-75">
-                “{estado.datos.consulta}” · depende
+              <p className={`text-xl tracking-[0.14em] text-rojo ${TITULAR}`}>
+                Depende, ve · “{estado.datos.consulta}”
               </p>
-              <h2 className="mb-4 mt-1 text-center text-2xl font-bold leading-tight">
+              <h2 className={`mb-4 mt-1.5 text-[clamp(34px,10vw,46px)] leading-[0.98] ${TITULAR}`}>
                 {estado.datos.pregunta}
               </h2>
-              <div className="overflow-hidden rounded-3xl border border-white/25">
+              <div className="sombra-lg border-4 border-tinta">
                 <button
                   onClick={() => consultar(`${estado.datos.consulta} limpio y seco`)}
-                  className="block w-full bg-stone-50 px-4 py-9 text-stone-900"
+                  className="flex w-full items-center justify-between border-b-4 border-tinta bg-[#fffaf0] px-4 py-7 text-left text-tinta"
                 >
-                  <span className="block text-xl font-extrabold">Limpio y seco</span>
-                  <span className="text-sm opacity-75">Sin grasa ni restos</span>
+                  <span>
+                    <strong className={`block text-[34px] font-normal leading-[0.95] ${TITULAR}`}>
+                      Limpio y seco
+                    </strong>
+                    <span className="text-sm font-semibold opacity-80">Sin grasa ni restos</span>
+                  </span>
+                  <span className="font-display text-4xl" aria-hidden="true">→</span>
                 </button>
                 <button
                   onClick={() => consultar(`${estado.datos.consulta} con grasa o restos de comida`)}
-                  className="block w-full bg-black px-4 py-9 text-white"
+                  className="flex w-full items-center justify-between bg-tinta px-4 py-7 text-left text-crema"
                 >
-                  <span className="block text-xl font-extrabold">Con grasa o comida</span>
-                  <span className="text-sm opacity-75">Manchado o con sobras</span>
+                  <span>
+                    <strong className={`block text-[34px] font-normal leading-[0.95] ${TITULAR}`}>
+                      Con grasa o comida
+                    </strong>
+                    <span className="text-sm font-semibold opacity-80">Manchado o con sobras</span>
+                  </span>
+                  <span className="font-display text-4xl" aria-hidden="true">→</span>
                 </button>
               </div>
             </div>
@@ -175,42 +214,52 @@ export default function Clasificador() {
 
           {estado.fase === 'resultado' && estado.datos.caneca !== 'depende' && (
             <div
-              className={`text-center ${
-                estado.datos.caneca === 'blanca' ? 'rounded-3xl border border-stone-300 bg-white p-6' : ''
+              className={`relative ${
+                estado.datos.caneca === 'blanca' ? 'sombra-lg border-4 border-tinta bg-white p-4' : ''
               }`}
             >
-              <p className="mb-4 text-sm opacity-75">“{estado.datos.consulta}”</p>
+              <div
+                aria-hidden="true"
+                className={`absolute -top-8 right-0 grid h-[84px] w-[84px] rotate-12 place-items-center rounded-full border-[3px] border-dashed border-current text-[26px] ${TITULAR} ${acento} ${
+                  estado.datos.caneca === 'blanca' ? 'right-2.5 bg-white' : ''
+                }`}
+              >
+                ¡Ve!
+              </div>
+
+              <p className="mb-2.5 pr-24 text-[15px] font-semibold">“{estado.datos.consulta}”</p>
 
               {estado.datos.caneca === 'posconsumo' ? (
                 <>
-                  <div className="mx-auto mb-4 grid h-24 w-24 place-items-center rounded-2xl border-4 border-current text-5xl font-bold">
-                    →
-                  </div>
-                  <p className="text-xs uppercase tracking-widest opacity-80">No va en ninguna bolsa</p>
-                  <h2 className="mb-3 mt-1 text-3xl font-extrabold leading-tight">
-                    Llévalo a un punto de recolección
+                  <p className={`pr-24 text-xl leading-tight tracking-[0.14em] ${TITULAR}`}>
+                    Esto no va en la bolsa
+                  </p>
+                  <h2 className={`entra mb-4 mt-1 text-[clamp(52px,17vw,80px)] leading-[0.9] ${TITULAR}`}>
+                    Llévalo a un punto
                   </h2>
                 </>
               ) : (
                 <>
-                  <div className="mx-auto mb-4 w-24">
-                    <div className="-mx-2 mb-1.5 h-3 rounded-full bg-current" />
-                    <div className="h-28 bg-current [clip-path:polygon(0_0,100%_0,88%_100%,12%_100%)]" />
-                  </div>
-                  <p className="text-xs uppercase tracking-widest opacity-80">Va en la</p>
-                  <h2 className="mb-3 mt-1 text-6xl font-black leading-none">
+                  <p className={`pr-24 text-xl leading-tight tracking-[0.14em] ${TITULAR}`}>Va en la</p>
+                  <h2
+                    className={`entra mb-4 mt-1 leading-[0.84] ${TITULAR} ${
+                      estado.datos.caneca === 'blanca'
+                        ? 'text-[clamp(72px,25vw,112px)]'
+                        : 'text-[clamp(88px,31vw,140px)]'
+                    }`}
+                  >
                     {NOMBRE[estado.datos.caneca]}
                   </h2>
                 </>
               )}
 
-              <p className="mx-auto max-w-xs">{estado.datos.explicacion}</p>
+              <p className="max-w-sm text-[17px] font-semibold">{estado.datos.explicacion}</p>
 
               {estado.datos.preparacion.length > 0 && (
-                <ol className="mx-auto mt-4 max-w-xs text-left">
+                <ol className="mt-4">
                   {estado.datos.preparacion.map((paso, i) => (
-                    <li key={paso} className="flex gap-3 border-t border-current/25 py-2">
-                      <b className="opacity-70">{i + 1}</b>
+                    <li key={paso} className="flex items-baseline gap-3 border-t-2 border-current py-2">
+                      <span className="min-w-5 font-display text-[26px] leading-none">{i + 1}</span>
                       <span>{paso}</span>
                     </li>
                   ))}
@@ -218,15 +267,24 @@ export default function Clasificador() {
               )}
 
               {estado.datos.verificado ? (
-                <p className="mt-5 text-xs opacity-75">Fuente: {estado.datos.fuente}</p>
+                <p className="mt-4 text-[13px] font-semibold opacity-85">Fuente: {estado.datos.fuente}</p>
               ) : (
-                <p className="mt-5 inline-block rounded-full border border-dashed border-current px-3 py-1.5 text-xs">
-                  Respuesta de IA, sin verificar en la base curada
+                <p className="mt-4 inline-block -rotate-1 border-2 border-dashed border-current px-2.5 py-1 text-[13px] font-semibold">
+                  Respuesta de IA, sin verificar
                 </p>
               )}
             </div>
           )}
         </main>
+
+        {estado.fase === 'inicio' && (
+          <div
+            aria-hidden="true"
+            className="-mx-4 -mb-4 overflow-hidden whitespace-nowrap bg-tinta py-2.5 font-display text-[15px] tracking-[0.12em] text-amarillo"
+          >
+            RECICLÁ, VE ★ BLANCA ★ NEGRA ★ VERDE ★ RECICLÁ, VE ★ BLANCA ★ NEGRA ★ VERDE ★
+          </div>
+        )}
 
         {estado.fase !== 'inicio' && estado.fase !== 'cargando' && campo('Consulta otro residuo…')}
       </div>
