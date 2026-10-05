@@ -4,6 +4,8 @@
 
 **Demo:** https://reciclave.vercel.app
 
+![Cuatro pantallas de la app en celular: inicio, resultado en caneca negra, pregunta por el estado del residuo y residuo que va a punto de recolección](docs/pantallas-movil.png)
+
 ## Qué hace
 
 Separar residuos en Colombia tiene una regla simple (tres colores) y cientos de casos dudosos: la caja de pizza, el pote de yogur, las pilas. Reciclá, ve recibe el nombre del residuo en lenguaje natural y responde con:
@@ -12,6 +14,7 @@ Separar residuos en Colombia tiene una regla simple (tres colores) y cientos de 
 - La razón y los pasos de preparación (enjuagar, aplastar, guardar aparte).
 - Una pregunta de seguimiento cuando la respuesta depende del estado del residuo, por ejemplo si la caja tiene grasa.
 - El nivel de confianza: la fuente normativa cuando la respuesta sale de la base curada, o un aviso visible cuando la generó la IA.
+- Un mensaje fijo cuando lo que se escribe no es un residuo.
 
 ## Cómo funciona
 
@@ -51,6 +54,24 @@ Las tres rutas se deciden con dos señales: la similitud del mejor resultado y l
 
 **Costo cero.** Todo corre en capas gratuitas: Vercel, Neon y Google AI Studio.
 
+## Seguridad
+
+El endpoint es público y recibe texto libre que termina en un modelo de lenguaje, así que la app asume que alguien va a intentar manipularlo.
+
+- **El texto del usuario es un dato, no una instrucción.** Se envía al modelo delimitado y sin comillas ni saltos de línea, y el prompt indica que nunca se obedezca lo que traiga.
+- **La respuesta del modelo no se confía.** Antes de mostrarla, el servidor la valida: una caneca fuera de la lista se descarta, la explicación y los pasos se recortan a un largo máximo y se eliminan los enlaces.
+- **Entradas fuera de tema.** Si el texto no nombra un objeto, la app muestra un mensaje fijo y descarta lo que haya redactado la IA, para no servir de altavoz.
+- **Residuos peligrosos.** Siempre se remiten a un punto de recolección, sin instrucciones de manipulación.
+- **Abuso de volumen.** Tope de consultas por IP y por día, entrada de máximo 120 caracteres y tiempo límite por llamada al modelo.
+
+La inyección de instrucciones se reduce, no se elimina. Lo que estas capas garantizan es que el peor caso sea una explicación corta marcada como no verificada.
+
+## Identidad visual
+
+La interfaz toma el lenguaje de un cartel popular: titulares condensados a todo el ancho, colores planos y sombras duras. El color de la pantalla completa es la respuesta, de modo que se entiende sin leer. Se diseñó primero para celular y en pantallas anchas pasa a un formato horizontal.
+
+![Pantalla de inicio en escritorio](docs/escritorio-inicio.png)
+
 ## Stack
 
 - **Aplicación:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4
@@ -64,6 +85,7 @@ Las tres rutas se deciden con dos señales: la similitud del mejor resultado y l
 ```
 reciclave/
 ├── data/residuos.seed.json   Base curada de residuos
+├── docs/                     Capturas de pantalla
 ├── schema.sql                Tablas: residuos (con embedding) y limites
 ├── scripts/                  Carga de datos y calibración de umbrales
 │   ├── seed.js               Genera embeddings y carga la base
@@ -132,6 +154,7 @@ La app queda en http://localhost:3000.
 - La categoría `posconsumo` agrupa hoy tanto programas de devolución (pilas, medicamentos) como objetos voluminosos, que en rigor se gestionan distinto.
 - La app indica que un residuo debe llevarse a un punto de recolección, pero no dice dónde queda el más cercano.
 - La clasificación de las tres canecas se verificó contra el texto de la Resolución 2184 de 2019. Las referencias a las normas de posconsumo de cada residuo especial están pendientes de verificación.
+- Las defensas ante entradas maliciosas se probaron con casos puntuales, no con una evaluación sistemática.
 - Es una herramienta de orientación. Las rutas de aprovechamiento dependen de cada municipio.
 
 ## Fuente normativa
