@@ -2,7 +2,8 @@
 
 import { useState, type FormEvent } from "react";
 
-type Caneca = "blanca" | "negra" | "verde" | "posconsumo" | "depende";
+type Caneca =
+  "blanca" | "negra" | "verde" | "posconsumo" | "depende" | "no_aplica";
 
 type Resultado = {
   consulta: string;
@@ -41,6 +42,7 @@ const ETIQUETAS = [
 const FONDO = {
   inicio: "bg-crema text-tinta",
   depende: "bg-crema text-tinta",
+  no_aplica: "bg-crema text-tinta",
   blanca: "bg-[#fffaf0] text-tinta",
   negra: "bg-tinta text-crema",
   verde: "bg-verde text-crema",
@@ -262,96 +264,118 @@ export default function Clasificador() {
             </div>
           )}
 
-          {estado.fase === "resultado" && estado.datos.caneca !== "depende" && (
-            <div
-              className={`lg:grid lg:grid-cols-[1.3fr_1fr] lg:items-end lg:gap-14 ${
-                estado.datos.caneca === "blanca"
-                  ? "sombra-lg border-4 border-tinta bg-white p-4 lg:p-10"
-                  : ""
-              }`}
-            >
-              <div className="relative">
-                <div
-                  aria-hidden="true"
-                  className={`absolute -top-8 right-0 grid h-[84px] w-[84px] rotate-12 place-items-center rounded-full border-[3px] border-dashed border-current text-[26px] lg:-top-16 lg:h-[120px] lg:w-[120px] lg:border-4 lg:text-[38px] ${TITULAR} ${acento} ${
-                    estado.datos.caneca === "blanca"
-                      ? "right-2.5 bg-white lg:right-0"
-                      : ""
-                  }`}
+          {/* El texto no nombra un residuo: mensaje fijo, sin nada redactado por la IA. */}
+          {estado.fase === "resultado" &&
+            estado.datos.caneca === "no_aplica" && (
+              <div>
+                <p
+                  className={`text-xl tracking-[0.14em] text-rojo lg:text-3xl ${TITULAR}`}
                 >
-                  ¡Ve!
+                  Eso no es un residuo
+                </p>
+                <h2
+                  className={`entra mb-4 mt-1.5 text-[clamp(52px,17vw,80px)] leading-[0.9] lg:text-[clamp(100px,10vw,150px)] ${TITULAR}`}
+                >
+                  Eso no se bota, ve
+                </h2>
+                <p className="max-w-sm text-[17px] font-semibold lg:max-w-md lg:text-2xl">
+                  Escribe un objeto o residuo y te digo en qué caneca va.
+                </p>
+              </div>
+            )}
+
+          {estado.fase === "resultado" &&
+            estado.datos.caneca !== "depende" &&
+            estado.datos.caneca !== "no_aplica" && (
+              <div
+                className={`lg:grid lg:grid-cols-[1.3fr_1fr] lg:items-end lg:gap-14 ${
+                  estado.datos.caneca === "blanca"
+                    ? "sombra-lg border-4 border-tinta bg-white p-4 lg:p-10"
+                    : ""
+                }`}
+              >
+                <div className="relative">
+                  <div
+                    aria-hidden="true"
+                    className={`absolute -top-8 right-0 grid h-[84px] w-[84px] rotate-12 place-items-center rounded-full border-[3px] border-dashed border-current text-[26px] lg:-top-16 lg:h-[120px] lg:w-[120px] lg:border-4 lg:text-[38px] ${TITULAR} ${acento} ${
+                      estado.datos.caneca === "blanca"
+                        ? "right-2.5 bg-white lg:right-0"
+                        : ""
+                    }`}
+                  >
+                    ¡Ve!
+                  </div>
+
+                  <p className="mb-2.5 pr-24 text-[15px] font-semibold lg:pr-36 lg:text-xl">
+                    “{estado.datos.consulta}”
+                  </p>
+
+                  {estado.datos.caneca === "posconsumo" ? (
+                    <>
+                      <p
+                        className={`pr-24 text-xl leading-tight tracking-[0.14em] lg:pr-36 lg:text-3xl ${TITULAR}`}
+                      >
+                        Esto no va en la bolsa
+                      </p>
+                      <h2
+                        className={`entra mb-4 mt-1 text-[clamp(52px,17vw,80px)] leading-[0.9] lg:mb-0 lg:text-[clamp(84px,8.5vw,120px)] ${TITULAR}`}
+                      >
+                        Llévalo a un punto
+                      </h2>
+                    </>
+                  ) : (
+                    <>
+                      <p
+                        className={`pr-24 text-xl leading-tight tracking-[0.14em] lg:pr-36 lg:text-3xl ${TITULAR}`}
+                      >
+                        Va en la
+                      </p>
+                      <h2
+                        className={`entra mb-4 mt-1 leading-[0.84] lg:mb-0 ${TITULAR} ${
+                          estado.datos.caneca === "blanca"
+                            ? "text-[clamp(72px,25vw,112px)] lg:text-[clamp(140px,12.5vw,178px)]"
+                            : "text-[clamp(88px,31vw,140px)] lg:text-[clamp(170px,16vw,230px)]"
+                        }`}
+                      >
+                        {NOMBRE[estado.datos.caneca]}
+                      </h2>
+                    </>
+                  )}
                 </div>
 
-                <p className="mb-2.5 pr-24 text-[15px] font-semibold lg:pr-36 lg:text-xl">
-                  “{estado.datos.consulta}”
-                </p>
-
-                {estado.datos.caneca === "posconsumo" ? (
-                  <>
-                    <p
-                      className={`pr-24 text-xl leading-tight tracking-[0.14em] lg:pr-36 lg:text-3xl ${TITULAR}`}
-                    >
-                      Esto no va en la bolsa
-                    </p>
-                    <h2
-                      className={`entra mb-4 mt-1 text-[clamp(52px,17vw,80px)] leading-[0.9] lg:mb-0 lg:text-[clamp(84px,8.5vw,120px)] ${TITULAR}`}
-                    >
-                      Llévalo a un punto
-                    </h2>
-                  </>
-                ) : (
-                  <>
-                    <p
-                      className={`pr-24 text-xl leading-tight tracking-[0.14em] lg:pr-36 lg:text-3xl ${TITULAR}`}
-                    >
-                      Va en la
-                    </p>
-                    <h2
-                      className={`entra mb-4 mt-1 leading-[0.84] lg:mb-0 ${TITULAR} ${
-                        estado.datos.caneca === "blanca"
-                          ? "text-[clamp(72px,25vw,112px)] lg:text-[clamp(140px,12.5vw,178px)]"
-                          : "text-[clamp(88px,31vw,140px)] lg:text-[clamp(170px,16vw,230px)]"
-                      }`}
-                    >
-                      {NOMBRE[estado.datos.caneca]}
-                    </h2>
-                  </>
-                )}
-              </div>
-
-              <div className="lg:pb-2">
-                <p className="max-w-sm text-[17px] font-semibold lg:max-w-md lg:text-2xl">
-                  {estado.datos.explicacion}
-                </p>
-
-                {estado.datos.preparacion.length > 0 && (
-                  <ol className="mt-4 lg:text-lg">
-                    {estado.datos.preparacion.map((paso, i) => (
-                      <li
-                        key={paso}
-                        className="flex items-baseline gap-3 border-t-2 border-current py-2"
-                      >
-                        <span className="min-w-5 font-display text-[26px] leading-none">
-                          {i + 1}
-                        </span>
-                        <span>{paso}</span>
-                      </li>
-                    ))}
-                  </ol>
-                )}
-
-                {estado.datos.verificado ? (
-                  <p className="mt-4 text-[13px] font-semibold opacity-85 lg:text-base">
-                    Fuente: {estado.datos.fuente}
+                <div className="lg:pb-2">
+                  <p className="max-w-sm text-[17px] font-semibold lg:max-w-md lg:text-2xl">
+                    {estado.datos.explicacion}
                   </p>
-                ) : (
-                  <p className="mt-4 inline-block -rotate-1 border-2 border-dashed border-current px-2.5 py-1 text-[13px] font-semibold">
-                    Respuesta de IA, sin verificar
-                  </p>
-                )}
+
+                  {estado.datos.preparacion.length > 0 && (
+                    <ol className="mt-4 lg:text-lg">
+                      {estado.datos.preparacion.map((paso, i) => (
+                        <li
+                          key={paso}
+                          className="flex items-baseline gap-3 border-t-2 border-current py-2"
+                        >
+                          <span className="min-w-5 font-display text-[26px] leading-none">
+                            {i + 1}
+                          </span>
+                          <span>{paso}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  )}
+
+                  {estado.datos.verificado ? (
+                    <p className="mt-4 text-[13px] font-semibold opacity-85 lg:text-base">
+                      Fuente: {estado.datos.fuente}
+                    </p>
+                  ) : (
+                    <p className="mt-4 inline-block -rotate-1 border-2 border-dashed border-current px-2.5 py-1 text-[13px] font-semibold">
+                      Respuesta de IA, sin verificar
+                    </p>
+                  )}
+                </div>
               </div>
-            </div>
-          )}
+            )}
         </main>
 
         {estado.fase !== "inicio" && estado.fase !== "cargando" && (
