@@ -3,7 +3,7 @@
 import { createHash } from "node:crypto";
 import { query } from "./db";
 
-const POR_IP_HORA = 2;
+const POR_IP_HORA = 20;
 const GLOBAL_DIA = 300;
 
 // Suma 1 al contador de la ventana actual y devuelve el total.
